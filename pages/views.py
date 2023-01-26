@@ -19,13 +19,14 @@ def essay_writing(request):
         response = openai.Completion.create(
             model="text-davinci-002",
             prompt=prompt,
-            max_tokens=200,
+            max_tokens=1000,
         )
         answer = response['choices'][0]['text']
         print(answer)
     else:
         answer = None
-    return render(request, 'pages/essay_writing.html', {'answer': answer})
+        prompt = None
+    return render(request, 'pages/essay_writing.html', {'answer': answer,'prompt':prompt})
 
 def paraphrase(request):
     if request.method == 'POST':
@@ -45,6 +46,26 @@ def paraphrase(request):
     else:
         answer = None
     return render(request, 'pages/paraphrase.html', {'answer': answer})
+def generate_images(request):
+    if request.method == 'POST':
+        prompt = request.POST['question']
+        # language = request.POST['language']
+        print(prompt)
+        load_dotenv()
+        openai.api_key = os.environ.get("GPT3_KEY")
+        response = openai.Image.create(
+            prompt=prompt,
+            n=2,
+            size='512x512',
+            # max_tokens=200,
+        )
+        image_url = response['data'][0]['url']
+        print(image_url)
+    else:
+        image_url = None
+        prompt = None
+    return render(request, 'pages/image_generation.html', {'image_url': image_url,'prompt':prompt})
+
 
 def about(request):
     return render(request, 'pages/about.html')
