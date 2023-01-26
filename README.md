@@ -15,7 +15,11 @@ AI Writer is a website that utilizes GPT-3 technology to generate high-quality e
 
 To run the website locally, clone the repository and run the following commands in your terminal:
 
-python manage.py runserver
+`pip install -r requirements.txt`
+
+`export GPT3_KEY="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"`
+
+`python manage.py runserver`
 
 The website will then be available at http://127.0.0.1:8000/
 
