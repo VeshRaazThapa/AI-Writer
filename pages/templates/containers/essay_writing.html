@@ -1,0 +1,13 @@
+{% extends 'generator.html' %}
+{% block main %}
+    {% with input_placeholder="Give a topic to write essay ..." show_language_select=True %}
+        {{ block.super }}
+    {% endwith %}
+
+{% endblock main %}
+{% block response %}
+    {% if answer %}
+        <div class="" id="answer" name="answer"
+             style="width:100%;height:auto;overflow:auto; text-align: justify">{{ answer }}</div>
+    {% endif %}
+{% endblock response %}
