@@ -1,0 +1,42 @@
+{% block main %}
+    <div class="generator" style="background-color:var(--shadow);height:100%;">
+        <div class="response">
+            <div class="p-4" style="background-color:var(--card-background-color)">
+                {% if prompt %}
+                    {{ prompt }}
+                {% endif %}
+            </div>
+            <div class="p-4">
+                {% block response %}
+                {% endblock response %}
+            </div>
+
+
+        </div>
+        <div class="col-sm-10 col-md-4 col-lg-6" style="position:fixed; bottom:0;">
+            <form onsubmit="" url="{% url 'essay_writing' %}" id="essay_writing" method="post" style="padding:20px;">
+                {% csrf_token %}
+                <div style="display:flex; align-items: center;gap:20px;">
+                    {% if show_language_select %}
+                        <div class="" style="flex-shrink: 0">
+                            <select id="language" name="language">
+                                <option value="english">English</option>
+                                <option value="nepali">Nepali</option>
+                            </select>
+                        </div>
+                    {% endif %}
+                    <div style="flex-grow: 1">
+                        <input placeholder="{{ input_placeholder }}" class="" id="question"
+                               name="question">
+                    </div>
+
+                    <div>
+                        <button type="submit" style="border-radius:10px;" class="btn btn-primary"><i
+                                class="fa fa-paper-plane"></i></button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+{% endblock main %}
