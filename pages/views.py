@@ -2,6 +2,7 @@ from django.shortcuts import render
 import openai
 from dotenv import load_dotenv
 import os
+from django.http import JsonResponse
 #python manage.py runserver
 
 def home(request):
@@ -24,9 +25,10 @@ def essay_writing(request):
         answer = response['choices'][0]['text']
         print(answer)
     else:
-        answer = None
+        answer = 'Get request vayo'
         prompt = None
-    return render(request, 'pages/essay_writing.html', {'answer': answer,'prompt':prompt})
+    # return render(request, 'pages/essay_writing.html', {'answer': answer,'prompt':prompt})
+    return JsonResponse({'answer': answer,'prompt':prompt})
 
 def paraphrase(request):
     if request.method == 'POST':

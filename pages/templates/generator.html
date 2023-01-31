@@ -14,7 +14,7 @@
 
         </div>
         <div class="col-sm-10 col-md-4 col-lg-6" style="position:fixed; bottom:0;">
-            <form onsubmit="" url="{% url 'essay_writing' %}" id="essay_writing" method="post" style="padding:20px;">
+            <form onsubmit="" id="{{ id }}_form" method="post" style="padding:20px;">
                 {% csrf_token %}
                 <div style="display:flex; align-items: center;gap:20px;">
                     {% if show_language_select %}
@@ -39,4 +39,22 @@
             </form>
         </div>
     </div>
+    <script>
+
+        $("#{{ id }}_form").submit(function (e) {
+            e.preventDefault();
+            var url =
+            {{ request_url }}  // get the url of the `load_districts` view
+            var url = 'http://localhost:8000/essay-writing/'  // get the url of the `load_districts` view
+            {#console.log(url);#}
+            $.ajax({                       // initialize an AJAX request
+                url: url,                    // set the url of the request (= localhost:8000/ajax_templates/ajax/load-districts/)
+                success: function (data) {// `data` is the return of the `load_districts` view function
+                    $("#v-pills-essay_writing").html(data['answer']);  // replace the contents of the city input with the data that came from the server
+                }
+            });
+
+        });
+
+    </script>
 {% endblock main %}
