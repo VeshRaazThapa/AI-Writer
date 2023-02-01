@@ -1,6 +1,8 @@
 {% extends 'generator.html' %}
+{#{% load custom_template_tags %}#}
 {% block main %}
-    {% with input_placeholder="Give a topic to write essay ..." show_language_select=True %}
+    {% url 'essay_writing' as essay_writing_url %}
+    {% with  request_url=essay_writing_url input_placeholder="Give a topic to write essay ..." show_language_select=True id='essay_writing' %}
         {{ block.super }}
     {% endwith %}
 
