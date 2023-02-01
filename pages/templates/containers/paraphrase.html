@@ -1,0 +1,12 @@
+{% extends 'generator.html' %}
+{#{% load custom_template_tags %}#}
+{% block main %}
+    {% url 'paraphrase' as url %}
+    {% with  request_url=url input_placeholder="Give a topic to paraphrase ..." show_language_select=True id='paraphrase' %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock main %}
+{% block response %}
+        <div class="" id="paraphrase_answer" name="paraphrase_answer"
+             style="width:100%;height:auto;overflow:auto; text-align: justify"></div>
+{% endblock response %}
