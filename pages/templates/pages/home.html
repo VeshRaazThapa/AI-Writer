@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <div class="tab-content" id="v-pills-tabContent">
+    <div class="tab-content p-4" id="v-pills-tabContent">
         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
              aria-labelledby="v-pills-home-tab">
             <br>
-            <h1>All Blogs</h1>
-
+            <h2 class="teko">All Blogs</h2>
+            <br>
             <ul class="list-group">
                 {% for blog in blogs %}
-                    <li class="list-group-item">{{ blog.title }}</li>
-                    <h1>{{ blog.title }}</h1>
-                    <p>{{ blog.content|safe }}</p>
+                    <li class="list-group-item kaushan">{{ blog.title }}</li>
+                    {#                    <h1>{{ blog.title }}</h1>#}
+                    {#                    <p>{{ blog.content|safe }}</p>#}
                 {% endfor %}
             </ul>
 

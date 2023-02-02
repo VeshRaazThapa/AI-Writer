@@ -3,40 +3,41 @@
 ROOT CSS VARIABLES AND CONFIGS
 
 */
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --main-background-color: #11161a;
-        --card-background-color: #1d2126;
-        --navigation-color: var(--card-background-color);
-        --border-color: rgba(255, 255, 255, 0.12);
-        --primary: #4398ec;
-        --color_1: #a27173;
-        --color_2: #6e85ab;
-        --color_3: #588f6c;
-        --color_4: #6b3d79;
-        --color_5: #3987cb;
+/*@media (prefers-color-scheme: dark) {*/
+/*    :root {*/
+/*        --main-background-color: #11161a;*/
+/*        --card-background-color: #1d2126;*/
+/*        --navigation-color: var(--card-background-color);*/
+/*        --border-color: rgba(255, 255, 255, 0.12);*/
+/*        --primary: #4398ec;*/
+/*        --color_1: #a27173;*/
+/*        --color_2: #6e85ab;*/
+/*        --color_3: #588f6c;*/
+/*        --color_4: #6b3d79;*/
+/*        --color_5: #3987cb;*/
 
-        --primary-text: rgba(255, 255, 255, 0.87);
-        --secondary-text: rgba(255, 255, 255, 0.6);
-        --tertiary-text: rgba(255, 255, 255, 0.4);
-
-
-        --shadow: rgba(0, 0, 0, 0.2);
-
-        background-color: var(--main-background-color);
+/*        --primary-text: rgba(255, 255, 255, 0.87);*/
+/*        --secondary-text: rgba(255, 255, 255, 0.6);*/
+/*        --tertiary-text: rgba(255, 255, 255, 0.4);*/
 
 
-    }
+/*        --shadow: rgba(0, 0, 0, 0.2);*/
 
-    * {
-        margin: 0;
-        padding: 0;
+/*        background-color: var(--main-background-color);*/
 
-        color: var(--primary-text);
 
-    }
-}
+/*    }*/
+
+/*    * {*/
+/*        margin: 0;*/
+/*        padding: 0;*/
+
+/*        color: var(--primary-text);*/
+
+/*    }*/
+/*}*/
 
 h1, h2, h3, h4, h5, h6, p, blockquote,
 form, label, fieldset, address, p {
@@ -45,26 +46,27 @@ form, label, fieldset, address, p {
 }
 
 
-@media (prefers-color-scheme: light) {
-    :root {
-        --main-background-color: #e9f0f6;
-        --card-background-color: #f2fcff;
-        --navigation-color: var(--card-background-color);
-        --border-color: rgba(0, 0, 0, 0.28);
-        --primary: #1583E9;
-        --color_1: #FEB4B6;
-        --color_2: #BFD3F8;
-        --color_3: #8EDBA9;
-        --color_4: #DFA0F2;
-        --color_5: #1583E9;
+/*@media (prefers-color-scheme: light) {*/
+:root {
+    --main-background-color: #e9f0f6;
+    --card-background-color: #f2fcff;
+    --navigation-color: var(--card-background-color);
+    --border-color: rgba(0, 0, 0, 0.28);
+    --primary: #ff7e15;
+    --color_1: #FEB4B6;
+    --color_2: #BFD3F8;
+    --color_3: #8EDBA9;
+    --color_4: #DFA0F2;
+    --color_5: #1583E9;
 
-        --primary-text: rgba(0, 0, 0, 0.87);
-        --secondary-text: rgba(0, 0, 0, 0.6);
-        --tertiary-text: rgba(0, 0, 0, 0.4);
+    --primary-text: rgba(0, 0, 0, 0.87);
+    --secondary-text: rgba(0, 0, 0, 0.6);
+    --tertiary-text: rgba(0, 0, 0, 0.4);
 
-        --shadow: rgba(0, 0, 0, 0.2);
-    }
+    --shadow: rgba(0, 0, 0, 0.2);
 }
+
+/*}*/
 
 
 * {
@@ -125,7 +127,7 @@ form, label, fieldset, address {
 }
 
 body {
-    padding-top: var(--top-navigation-height);
+    /*padding-top: var(--top-navigation-height);*/
 }
 
 body, html {
@@ -136,6 +138,10 @@ body, html {
 
 .teko {
     font-family: var(--teko) !important;
+}
+
+.kaushan {
+    font-family: 'Kaushan Script', cursive;
 }
 
 .roboto {
@@ -602,12 +608,36 @@ Generator
 
 
 select, input {
-    background-color:var(--card-background-color);
-    border:none;
-    outline:none;
+    background-color: var(--main-background-color);
+    border: none;
+    outline: none;
     padding: 8px 16px;
-    margin:0;
+    margin: 0;
     border-radius: 10px;
-    width:100%
+    width: 100%
 
+}
+
+.nav-link {
+    color: var(--secondary-text);
+    border-radius: 100px !important;
+    padding: 6px 24px;
+}
+
+.nav-link:hover {
+    color: var(--primary-text);
+    background-color: var(--shadow);
+}
+
+.nav-link .fa {
+    margin-right: 10px;
+}
+
+.nav-link.active {
+    border-radius: 100px;
+    background-color: var(--primary) !important;
+}
+
+.nav-link.active i {
+    color: white !important;
 }
