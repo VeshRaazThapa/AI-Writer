@@ -1,26 +1,4 @@
 {% extends 'base_detail.html' %}
 {% block content %}
-    <br><br><br><br><br>
-    <div class="container">
-        <h1 class="kaushan">
-            {{ object.title }}
-        </h1>
-        <br>
-        {{ object.content|safe }}
-    </div>
-    <div class="edit-container">
-        <button class="rnd-btn rnd-btn-primary edit-button ">
-            <i class="fa fa-edit" style="font-size:20px;"></i>
-        </button>
-    </div>
-    <style>
-        .edit-button {
-            padding: 30px;
-
-            position: fixed;
-            bottom:40px;
-            right:40px;
-            box-shadow: 20px 20px 20px var(--shadow);
-        }
-    </style>
+    {% include 'containers/blog_detail_view.html' %}
 {% endblock content %}
