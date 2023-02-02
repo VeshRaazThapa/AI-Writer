@@ -2,3 +2,4 @@ Django==4.0.4
 psycopg2-binary==2.9.3
 openai
 python-dotenv
+django-ckeditor

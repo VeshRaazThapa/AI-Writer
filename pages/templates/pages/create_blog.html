@@ -1,0 +1,25 @@
+{#<script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>#}
+{% load static %}
+{#<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>#}
+<script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+
+{#<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>#}
+{#<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>#}
+<form method="post" action="{% url 'create_blog' %}">
+    {% csrf_token %}
+    {{ form.title }}
+    {{ form.content }}
+{#    <div id="content">This is some sample content.</div>#}
+    <script>
+        CKEDITOR.replace( 'content' );
+        {#ClassicEditor#}
+        {#    .create(document.querySelector('#content'))#}
+        {#    .then(editor => {#}
+        {#        console.log(editor);#}
+        {#    })#}
+        {#    .catch(error => {#}
+        {#        console.error(error);#}
+        {#    });#}
+    </script>
+    <input type="submit" value="Save">
+</form>

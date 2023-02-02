@@ -1,12 +1,29 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from .forms import BlogForm
 import openai
 from dotenv import load_dotenv
 import os
 from django.http import JsonResponse
+from .models import Blog
+from django.http import HttpResponseRedirect
+
 #python manage.py runserver
 
 def home(request):
-    return render(request, 'pages/home.html')
+    form = BlogForm()
+    return render(request, 'pages/home.html', {'blog_form': form,'blogs':Blog.objects.all()})
+
+def create_blog(request):
+    if request.method == 'POST':
+        form = BlogForm(request.POST)
+        if form.is_valid():
+            form.save()
+            referer_url = request.META.get('HTTP_REFERER', '/')
+            return HttpResponseRedirect(referer_url)
+            # return redirect('blogs')
+    else:
+        form = BlogForm()
+    return render(request, 'pages/create_blog.html', {'form': form})
 
 def essay_writing(request):
     if request.method == 'POST':
@@ -16,7 +33,6 @@ def essay_writing(request):
         print(prompt)
         load_dotenv()
         openai.api_key = os.environ.get("GPT3_KEY")
-        # openai.api_key = "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"
         response = openai.Completion.create(
             model="text-davinci-002",
             prompt=prompt,
@@ -25,7 +41,7 @@ def essay_writing(request):
         answer = response['choices'][0]['text']
         print(answer)
     else:
-        answer = 'Get request vayo'
+        answer = None
         prompt = None
     # return render(request, 'pages/essay_writing.html', {'answer': answer,'prompt':prompt})
     return JsonResponse({'answer': answer,'prompt':prompt})
@@ -47,7 +63,9 @@ def paraphrase(request):
         print(answer)
     else:
         answer = None
-    return render(request, 'pages/paraphrase.html', {'answer': answer})
+        prompt = None
+    return JsonResponse({'answer': answer, 'prompt': prompt})
+
 def generate_images(request):
     if request.method == 'POST':
         prompt = request.POST['question']
@@ -66,8 +84,10 @@ def generate_images(request):
     else:
         image_url = None
         prompt = None
+    # return JsonResponse({'answer': image_url,'prompt':prompt})
     return render(request, 'pages/image_generation.html', {'image_url': image_url,'prompt':prompt})
 
 
 def about(request):
     return render(request, 'pages/about.html')
+
