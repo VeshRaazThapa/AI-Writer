@@ -1,0 +1,15 @@
+{% extends 'generator.html' %}
+{#{% load custom_template_tags %}#}
+{% block main %}
+    {% url 'blog_detail' object.pk as url %}
+    {% with  request_url=url input_placeholder="Give a topic to write essay ..." show_language_select=True id='blog_detail' %}
+        {{ block.super }}
+    {% endwith %}
+
+{% endblock main %}
+{% block response %}
+{#    {% if answer %}#}
+        <div class="" id="blog_detail_answer" name="blog_detail_answer"
+             style="width:100%;height:auto;overflow:auto; text-align: justify">{{ object.content|safe }}</div>
+{#    {% endif %}#}
+{% endblock response %}

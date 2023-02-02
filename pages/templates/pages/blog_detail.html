@@ -1,6 +1,4 @@
 {% extends 'base.html' %}
 {% block content %}
-    {{ object.title }}
-    <br>
-    {{ object.content|safe }}
+    {% include 'containers/blog_detail_view.html' %}
 {% endblock content %}
