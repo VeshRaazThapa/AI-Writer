@@ -73,8 +73,13 @@ form, label, fieldset, address, p {
     color: var(--primary-text);
 }
 
+html {
+    font-size: 14px;
+}
+
 /*  Navigation */
 * {
+
     --top-navigation-height: 55px;
     --teko: 'Teko', sans-serif;
     --roboto: 'Roboto', sans-serif;
@@ -640,4 +645,16 @@ select, input {
 
 .nav-link.active i {
     color: white !important;
+}
+
+.send_to_editor_button {
+    position: fixed;
+    bottom: 120px;
+    display: none;
+
+    border-radius: 100px;
+    height: 45px;
+    padding: 0px 30px;
+
+    box-shadow: 10px 20px 20px var(--shadow);
 }
