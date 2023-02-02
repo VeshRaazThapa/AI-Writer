@@ -3,6 +3,7 @@
 ROOT CSS VARIABLES AND CONFIGS
 
 */
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
 
 /*@media (prefers-color-scheme: dark) {*/
 /*    :root {*/
@@ -137,6 +138,10 @@ body, html {
 
 .teko {
     font-family: var(--teko) !important;
+}
+
+.kaushan {
+    font-family: 'Kaushan Script', cursive;
 }
 
 .roboto {

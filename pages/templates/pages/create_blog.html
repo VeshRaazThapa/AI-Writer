@@ -5,13 +5,45 @@
 
 {#<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>#}
 {#<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>#}
-<form method="post" action="{% url 'create_blog' %}" class="p-4">
+<style>
+    .cke_inner {
+        background: transparent;
+        height: 100%;
+    }
+
+    .cke_top {
+        background: var(--card-background-color);
+    }
+
+    .cke_chrome {
+        border: none;
+        border-radius: 20px;
+        overflow: hidden;
+        height: 100%;
+    {#box-shadow: 10px 10px 20px var(--shadow);#}
+    }
+
+    .django-ckeditor-widget {
+        width: 100%;
+        height: 100%;
+    }
+
+    .cke_contents {
+        height: 80% !important;
+    }
+
+</style>
+<form id="save_blog" method="post" action="{% url 'create_blog' %}" class="" style="height:100%;">
     {% csrf_token %}
-    {{ form.title }}
+    <div class="p-2 kaushan blog-title" id="blog-title-wrapper">
+        {{ form.title }}
+    </div>
+
     {{ form.content }}
-{#    <div id="content">This is some sample content.</div>#}
+    {#    <div id="content">This is some sample content.</div>#}
     <script>
-        CKEDITOR.replace( 'content' );
+        CKEDITOR.replace('content');
+        console.log(CKEDITOR.instances);
         {#ClassicEditor#}
         {#    .create(document.querySelector('#content'))#}
         {#    .then(editor => {#}
@@ -20,6 +52,49 @@
         {#    .catch(error => {#}
         {#        console.error(error);#}
         {#    });#}
+
+        blogTitleWrapper = document.querySelector('#blog-title-wrapper');
+        titleInput = blogTitleWrapper.querySelector('input');
+        titleInput.placeholder = 'Untitled Blog'
+        titleInput.style.fontSize = '2rem'
+
     </script>
-    <input class="btn btn-primary" type="submit" value="Save">
+
+
 </form>
+
+<div class="done_editing">
+    <button title="Save blog" style="position:relative;" form="save_blog" class="rnd-btn rnd-btn-primary" type="submit" value="Save">
+        <i class="fa fa-save" style="position:absolute;left:20px; top:18px;font-size:1.4rem;"></i> <span
+            style="margin-left:10px;font-weight:bold;font-size:1.2rem" class="button-text">Save</span>
+    </button>
+</div>
+<style>
+    .done_editing {
+        position: absolute;
+        right: 30px;
+        bottom: 20px;
+    }
+
+    .done_editing button {
+        padding: 30px;
+        box-shadow: 10px 20px 20px var(--shadow);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .button-text {
+        opacity:0;
+        transform:translateX(-10px);
+        transition:opacity 0.2s ease-in-out;
+    }
+    .done_editing button:hover {
+        width: 150px;
+    }
+
+    .done_editing button:hover .button-text {
+        display: block;
+        transform:translateX(0px);
+        opacity:1;
+    }
+
+</style>

@@ -1,19 +1,39 @@
 {% block main %}
-    <div class="generator" style="background-color:var(--shadow);height:100%; position: relative">
-        <div class="response">
-            <div class="p-4" style="background-color:var(--card-background-color)">
-                {% if prompt %}
-                    {{ prompt }}
-                {% endif %}
+    <div class="generator"
+         style="border-radius:20px;height:100%;">
+        <div class="response"
+             style="height: calc(100vh - 2 * var(--top-navigation-height) - 20px);">
+            {#            <div class="p-4" style="background-color:var(--card-background-color)">#}
+            {#                {% if prompt %}#}
+            {#                    {{ prompt }}#}
+            {#                {% endif %}#}
+            {#            </div>#}
+            <div class="empty_response_view" id="empty_view">
+                {% block empty_view %}
+                {% endblock empty_view %}
             </div>
-            <div class="p-4">
+            <div class="p-4" id="response" style="padding-bottom: 200px !important;">
                 {% block response %}
                 {% endblock response %}
+                <button class="btn btn-primary" id="send_to_editor_button" type="button">Send to editor</button>
             </div>
 
-
         </div>
-        <div class="" style="position:fixed; bottom:0;background-color: var(--card-background-color); width:100%;">
+        <style>
+            #send_to_editor_button {
+                position: fixed;
+                bottom: 120px;
+                display: none;
+
+                border-radius: 100px;
+                height: 45px;
+                padding: 0px 30px;
+
+                box-shadow: 10px 20px 20px var(--shadow);
+            }
+        </style>
+        <div class=""
+             style="position:fixed;bottom:20px;background-color: var(--card-background-color);border-radius:200px;box-shadow:20px 20px 20px var(--shadow); min-width:600px;">
             <form onsubmit="" id="{{ id }}_form" method="post" style="padding:20px;">
                 {% csrf_token %}
                 <div style="display:flex; align-items: center;gap:20px;">
@@ -31,7 +51,8 @@
                     </div>
 
                     <div>
-                        <button type="submit" style="border-radius:10px;border:none; background-color: var(--primary);" class="btn btn-primary"><i
+                        <button type="submit" style="border-radius:10px;border:none; background-color: var(--primary);"
+                                class="btn btn-primary"><i
                                 class="fa fa-paper-plane"></i></button>
                     </div>
                 </div>
@@ -40,11 +61,18 @@
         </div>
     </div>
     <script>
-
-        loader = document.getElementById('loader')
         $("#{{ id }}_form").submit(function (e) {
+            const loader = document.getElementById('loader')
+            const response = document.getElementById('response')
+            const send_to_editor_button = document.getElementById('send_to_editor_button')
+            const empty_view = document.getElementById('empty_view')
+
             e.preventDefault();
             loader.style.display = 'block';
+            response.style.display = 'none';
+            send_to_editor_button.style.display = 'none';
+            empty_view.style.display = 'none';
+
             var url =
                 {{ request_url }}  // get the url
                 $.ajax({                       // initialize an AJAX request
@@ -56,19 +84,31 @@
                         csrfmiddlewaretoken: '{{ csrf_token }}'
                     },
                     success: function (data) {// `data` is the return of the  view function
-                        if (!data) {
-                            return
-                        }
                         loader.style.display = 'none';
+                        response.style.display = 'block';
+                        send_to_editor_button.style.display = 'block';
                         if (data['answer']) {
-                            $("#{{ id }}_answer").append(data['answer']);  // replace the contents of the input with the data that came from the server
+                            $("#{{ id }}_answer").html(data['answer']);  // replace the contents of the input with the data that came from the server
                         } else {
-                            $("#{{ id }}_answer").append(data);  // for image generator
+                            $("#{{ id }}_answer").html(data);  // for image generator
                         }
                     }
                 });
 
         });
 
+
+        sendToEditorButton = document.querySelector('#send_to_editor_button');
+
+        sendToEditorButton.addEventListener('click', (e) => {
+            const generated_content = e.target.parentElement.children[0].innerHTML;
+            if (generated_content) {
+                CKEDITOR.instances['id_content'].insertHtml(generated_content);
+            } else {
+                const generated_image = e.target.parentElement.children[0].innerHTML;
+                CKEDITOR.instances['id_content'].insertHtml(generated_content);
+            }
+
+        })
     </script>
 {% endblock main %}

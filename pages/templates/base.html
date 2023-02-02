@@ -66,9 +66,10 @@
 {#        </div>#}
 {#    </div>#}
 {#</nav>#}
-<div class="contents" style="height:calc(100vh)">
+<div class="contents" style="height:calc(100vh);overflow:hidden">
     <div class="row h-full">
-        <div class="col-sm-2 col-md-4 col-lg-2" style="background-color: var(--card-background-color); border-right:1px solid var(--shadow);">
+        <div class="col-sm-2 col-md-4 col-lg-2"
+             style="background-color: var(--card-background-color); border-right:1px solid var(--shadow);">
             <div class="">
                 <img src="{% static "logo.png" %}" alt="">
                 <br>
@@ -76,7 +77,8 @@
                     AI Writer
                 </h3>
             </div>
-            <div class="nav flex-column nav-pills p-4" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="gap:10px;">
+            <div class="nav flex-column nav-pills p-4" id="v-pills-tab" role="tablist" aria-orientation="vertical"
+                 style="gap:10px;">
                 <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
                    aria-controls="v-pills-home" aria-selected="true">Home</a>
                 <a class="nav-link" id="v-pills-essay_writing-tab" data-toggle="pill" href="#v-pills-essay_writing"
@@ -108,19 +110,17 @@
         </div>
         <div class="col-sm-10 col-md-4 col-lg-5"
              style="position:relative; height: calc(100vh); overflow-y: auto;margin:0;padding:0;">
-           {% include 'containers/loader.html' %}
+            {% include 'containers/loader.html' %}
             {% block content %}
             {% endblock content %}
         </div>
-        <div class="col-sm-12 col-md-4 col-lg-5">
+        <div class="col-sm-12 col-md-4 col-lg-5"
+             style="margin:0;padding:0;background-color: var(--card-background-color);overflow:hidden; height:100vh;">
             {#    <div>#}
             {% if blog_form %}
                 {% include 'pages/create_blog.html' with form=blog_form %}
             {% endif %}
         </div>
-
-    </div>
-    <div class="row" style="width:100%;">
 
     </div>
 
