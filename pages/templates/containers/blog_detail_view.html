@@ -2,14 +2,43 @@
 {#{% load custom_template_tags %}#}
 {% block main %}
     {% url 'blog_detail' object.pk as url %}
-    {% with  request_url=url input_placeholder="Give a topic to write essay ..." show_language_select=True id='blog_detail' %}
+    {% with  request_url=url show_language_select=True id='blog_detail' %}
         {{ block.super }}
     {% endwith %}
 
 {% endblock main %}
 {% block response %}
 {#    {% if answer %}#}
+
+         <button class="btn btn-primary send_to_editor_button display" id="write_more" type="button" onclick="location.href='{% url 'detail_blog' object.pk %}'">
+                    write more
+         </button>
         <div class="" id="blog_detail_answer" name="blog_detail_answer"
-             style="width:100%;height:auto;overflow:auto; text-align: justify">{{ object.content|safe }}</div>
+             style="width:100%;height:auto;overflow:auto; text-align: justify">
+        {% if show_detail %}
+             <div class="container">
+        <h1 class="kaushan">
+            {{ object.title }}
+        </h1>
+        <br>
+        {{ object.content|safe }}
+    </div>
+    <div class="edit-container">
+        <button class="rnd-btn rnd-btn-primary edit-button " onclick="location.href='{% url 'detail_blog' object.pk %}'">
+            <i class="fa fa-edit" style="font-size:20px;"></i>
+        </button>
+    </div>
+    <style>
+        .edit-button {
+            padding: 30px;
+
+            position: fixed;
+            bottom:40px;
+            right:40px;
+            box-shadow: 20px 20px 20px var(--shadow);
+        }
+    </style>
+        {% endif %}
+        </div>
 {#    {% endif %}#}
 {% endblock response %}

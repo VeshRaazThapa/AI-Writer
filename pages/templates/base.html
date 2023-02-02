@@ -33,7 +33,9 @@
         <div class="col-sm-2 col-md-4 col-lg-2"
              style="background-color: var(--card-background-color); border-right:1px solid var(--shadow);">
             <div class="">
-                <img src="{% static "logo.png" %}" alt="">
+                <a href="/">
+                    <img src="{% static "logo.png" %}" alt="">
+                </a>
                 <br>
                 <h3 class="teko px-4">
                     AI Writer
@@ -52,29 +54,12 @@
                    request-url="{% url 'paraphrase' %}" role="tab"
                    aria-controls="v-pills-settings" aria-selected="false">Generate Images</a>
             </div>
-            {#            <ul class="">#}
-            {#                <li class="nav-item">#}
-            {#                    <a class="nav-link" href="{% url 'home' %}">Home</a>#}
-            {#                </li>#}
-            {#                <li class="nav-item">#}
-            {#                    <a class="nav-link" href="{% url 'essay_writing' %}">Essay Writing</a>#}
-            {#                </li>#}
-            {#                <li class="nav-item">#}
-            {#                    <a class="nav-link" href="{% url 'paraphrase' %}">Paraphraser</a>#}
-            {#                </li>#}
-            {#                <li class="nav-item">#}
-            {#                    <a class="nav-link" href="{% url 'generate_images' %}">Generate Images</a>#}
-            {#                </li>#}
-            {#                <li class="nav-item">#}
-            {#                    <a class="nav-link" href="{% url 'about' %}">About</a>#}
-            {#                </li>#}
-            {#            </ul>#}
+
         </div>
         <div class="col-sm-10 col-md-4 col-lg-5"
              style="position:relative; height: calc(100vh); overflow-y: auto;margin:0;padding:0;">
             {% include 'containers/loader.html' %}
             {% include 'components/tab_contents.html' %}
-
             {% block content %}
             {% endblock content %}
         </div>

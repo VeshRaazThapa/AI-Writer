@@ -7,6 +7,7 @@ from django.contrib import admin
 urlpatterns = [
     path('', views.home, name='home'),
     path('create-blog/', views.create_blog, name='create_blog'),
+    path('plane-blog/<int:pk>/', views.BlogDetailPlaneView.as_view(), name='detail_blog_plane'),
     path('blog/<int:pk>/', views.BlogDetailView.as_view(), name='detail_blog'),
     path('blog/<int:pk>/edit',views.BlogUpdateView.as_view(), name='update_blog'),
     path('essay-writing/', views.essay_writing, name='essay_writing'),
