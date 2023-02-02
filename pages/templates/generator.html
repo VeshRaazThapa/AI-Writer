@@ -15,12 +15,12 @@
             <div class="p-4" id="response" style="padding-bottom: 200px !important;">
                 {% block response %}
                 {% endblock response %}
-                <button class="btn btn-primary" id="send_to_editor_button" type="button">Send to editor</button>
+                <button class="btn btn-primary send_to_editor_button" id="{{ id }}_send_to_editor_button" type="button">Send to editor</button>
             </div>
 
         </div>
         <style>
-            #send_to_editor_button {
+            .send_to_editor_button {
                 position: fixed;
                 bottom: 120px;
                 display: none;
@@ -64,7 +64,7 @@
         $("#{{ id }}_form").submit(function (e) {
             const loader = document.getElementById('loader')
             const response = document.getElementById('response')
-            const send_to_editor_button = document.getElementById('send_to_editor_button')
+            const send_to_editor_button = document.getElementById('{{ id }}_send_to_editor_button')
             const empty_view = document.getElementById('empty_view')
 
             e.preventDefault();
@@ -98,7 +98,7 @@
         });
 
 
-        sendToEditorButton = document.querySelector('#send_to_editor_button');
+        sendToEditorButton = document.querySelector('#{{ id }}_send_to_editor_button');
 
         sendToEditorButton.addEventListener('click', (e) => {
             const generated_content = e.target.parentElement.children[0].innerHTML;

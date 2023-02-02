@@ -1,7 +1,6 @@
 {#<script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>#}
 {% load static %}
 {#<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>#}
-<script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
 
 {#<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>#}
 {#<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>#}
@@ -33,7 +32,7 @@
     }
 
 </style>
-<form id="save_blog" method="post" action="{% url 'create_blog' %}" class="" style="height:100%;">
+<form id="save_blog" method="post" action="{% if update %}{% url 'update_blog' object.pk %}{% else %}{% url 'create_blog' %}{% endif %}" class="" style="height:100%;">
     {% csrf_token %}
     <div class="p-2 kaushan blog-title" id="blog-title-wrapper">
         {{ form.title }}
