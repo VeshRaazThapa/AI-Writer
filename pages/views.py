@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from .forms import BlogForm
 import openai
 from dotenv import load_dotenv
@@ -7,11 +7,13 @@ from django.http import JsonResponse
 from .models import Blog
 from django.http import HttpResponseRedirect
 
-#python manage.py runserver
+
+# python manage.py runserver
 
 def home(request):
     form = BlogForm()
-    return render(request, 'pages/home.html', {'blog_form': form,'blogs':Blog.objects.all()})
+    return render(request, 'pages/home.html', {'blog_form': form, 'blogs': Blog.objects.all()})
+
 
 def create_blog(request):
     if request.method == 'POST':
@@ -25,11 +27,12 @@ def create_blog(request):
         form = BlogForm()
     return render(request, 'pages/create_blog.html', {'form': form})
 
+
 def essay_writing(request):
     if request.method == 'POST':
         prompt = request.POST['question']
         language = request.POST['language']
-        prompt = "Write an essay in "+language+" about "+prompt
+        prompt = "Write an essay in " + language + " about " + prompt
         print(prompt)
         load_dotenv()
         openai.api_key = os.environ.get("GPT3_KEY")
@@ -44,13 +47,14 @@ def essay_writing(request):
         answer = None
         prompt = None
     # return render(request, 'pages/essay_writing.html', {'answer': answer,'prompt':prompt})
-    return JsonResponse({'answer': answer,'prompt':prompt})
+    return JsonResponse({'answer': answer, 'prompt': prompt})
+
 
 def paraphrase(request):
     if request.method == 'POST':
         prompt = request.POST['question']
         language = request.POST['language']
-        prompt = "Paraphrase in "+language+" this "+prompt
+        prompt = "Paraphrase in " + language + " this " + prompt
         print(prompt)
         load_dotenv()
         openai.api_key = os.environ.get("GPT3_KEY")
@@ -65,6 +69,7 @@ def paraphrase(request):
         answer = None
         prompt = None
     return JsonResponse({'answer': answer, 'prompt': prompt})
+
 
 def generate_images(request):
     if request.method == 'POST':
@@ -85,9 +90,8 @@ def generate_images(request):
         image_url = None
         prompt = None
     # return JsonResponse({'answer': image_url,'prompt':prompt})
-    return render(request, 'pages/image_generation.html', {'image_url': image_url,'prompt':prompt})
+    return render(request, 'pages/image_generation.html', {'image_url': image_url, 'prompt': prompt})
 
 
 def about(request):
     return render(request, 'pages/about.html')
-

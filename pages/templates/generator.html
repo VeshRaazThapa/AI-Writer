@@ -1,5 +1,5 @@
 {% block main %}
-    <div class="generator" style="background-color:var(--shadow);height:100%;">
+    <div class="generator" style="background-color:var(--shadow);height:100%; position: relative">
         <div class="response">
             <div class="p-4" style="background-color:var(--card-background-color)">
                 {% if prompt %}
@@ -13,7 +13,7 @@
 
 
         </div>
-        <div class="col-sm-10 col-md-4 col-lg-6" style="position:fixed; bottom:0;">
+        <div class="" style="position:fixed; bottom:0;background-color: var(--card-background-color); width:100%;">
             <form onsubmit="" id="{{ id }}_form" method="post" style="padding:20px;">
                 {% csrf_token %}
                 <div style="display:flex; align-items: center;gap:20px;">
@@ -31,7 +31,7 @@
                     </div>
 
                     <div>
-                        <button type="submit" style="border-radius:10px;" class="btn btn-primary"><i
+                        <button type="submit" style="border-radius:10px;border:none; background-color: var(--primary);" class="btn btn-primary"><i
                                 class="fa fa-paper-plane"></i></button>
                     </div>
                 </div>
@@ -41,27 +41,32 @@
     </div>
     <script>
 
+        loader = document.getElementById('loader')
         $("#{{ id }}_form").submit(function (e) {
             e.preventDefault();
+            loader.style.display = 'block';
             var url =
-            {{ request_url }}  // get the url
-            $.ajax({                       // initialize an AJAX request
-                url: url,                    // set the url of the request
-                type: "POST",
-                data: {
-                    language:$('#{{ id }}_language :selected').text(),
-                    question:$('#{{ id }}_question').val(),
-                    csrfmiddlewaretoken: '{{ csrf_token }}'
-                },
-                success: function (data) {// `data` is the return of the  view function
-                    if (data['answer']) {
-                        $("#{{ id }}_answer").html(data['answer']);  // replace the contents of the input with the data that came from the server
-
-                    } else {
-                        $("#{{ id }}_answer").html(data);  // for image generator
+                {{ request_url }}  // get the url
+                $.ajax({                       // initialize an AJAX request
+                    url: url,                    // set the url of the request
+                    type: "POST",
+                    data: {
+                        language: $('#{{ id }}_language :selected').text(),
+                        question: $('#{{ id }}_question').val(),
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success: function (data) {// `data` is the return of the  view function
+                        if (!data) {
+                            return
+                        }
+                        loader.style.display = 'none';
+                        if (data['answer']) {
+                            $("#{{ id }}_answer").append(data['answer']);  // replace the contents of the input with the data that came from the server
+                        } else {
+                            $("#{{ id }}_answer").append(data);  // for image generator
+                        }
                     }
-                }
-            });
+                });
 
         });
 
