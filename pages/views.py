@@ -6,7 +6,8 @@ import os
 from django.http import JsonResponse
 from .models import Blog
 from django.http import HttpResponseRedirect
-
+from django.views.generic import DetailView, UpdateView
+from django.urls import reverse_lazy
 
 # python manage.py runserver
 
@@ -27,6 +28,33 @@ def create_blog(request):
         form = BlogForm()
     return render(request, 'pages/create_blog.html', {'form': form})
 
+class BlogDetailView(DetailView):
+    model = Blog
+    template_name = 'pages/blog_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['blog_form'] = BlogForm(instance=self.object)
+        context['update'] = True
+        return context
+    # return render(request, 'pages/home.html', {'blog_form': form, 'blogs': Blog.objects.all()})
+
+class BlogUpdateView(UpdateView):
+    model = Blog
+    template_name = 'pages/create_blog.html'
+    fields = ['title', 'content']
+    success_url = reverse_lazy('home')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['blog_form'] = BlogForm(instance=self.object)
+        context['update'] = True
+        return context
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        print(self.request.path)
+        return redirect(self.request.path.replace('/edit',''))
 
 def essay_writing(request):
     if request.method == 'POST':
