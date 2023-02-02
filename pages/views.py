@@ -28,6 +28,16 @@ def create_blog(request):
         form = BlogForm()
     return render(request, 'pages/create_blog.html', {'form': form})
 
+class BlogDetailPlaneView(DetailView):
+    model = Blog
+    template_name = 'pages/blog_detail_plane.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['blog_form'] = BlogForm(instance=self.object)
+        context['update'] = True
+        return context
+    # return render(request, 'pages/home.html', {'blog_form': form, 'blogs': Blog.objects.all()})
 class BlogDetailView(DetailView):
     model = Blog
     template_name = 'pages/blog_detail.html'
@@ -36,6 +46,7 @@ class BlogDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['blog_form'] = BlogForm(instance=self.object)
         context['update'] = True
+        context['blogs']= Blog.objects.all()
         return context
     # return render(request, 'pages/home.html', {'blog_form': form, 'blogs': Blog.objects.all()})
 

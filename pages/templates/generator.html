@@ -15,40 +15,46 @@
             <div class="p-4" id="response" style="padding-bottom: 200px !important;">
                 {% block response %}
                 {% endblock response %}
-                <button class="btn btn-primary send_to_editor_button" id="{{ id }}_send_to_editor_button" type="button">Send to editor</button>
+                <button class="btn btn-primary send_to_editor_button" id="{{ id }}_send_to_editor_button" type="button">
+                    Send to editor
+                </button>
             </div>
 
         </div>
         <style>
 
         </style>
-        <div class=""
-             style="position:fixed;bottom:20px;background-color: var(--card-background-color);border-radius:200px;box-shadow:20px 20px 20px var(--shadow); min-width:600px;">
-            <form onsubmit="" id="{{ id }}_form" method="post" style="padding:20px;">
-                {% csrf_token %}
-                <div style="display:flex; align-items: center;gap:20px;">
-                    {% if show_language_select %}
-                        <div class="" style="flex-shrink: 0">
-                            <select id="{{ id }}_language" name="{{ id }}_language">
-                                <option value="english">English</option>
-                                <option value="nepali">Nepali</option>
-                            </select>
+        {% if input_placeholder %}
+
+            <div class=""
+                 style="position:fixed;bottom:20px;background-color: var(--card-background-color);border-radius:200px;box-shadow:20px 20px 20px var(--shadow); min-width:600px;">
+                <form onsubmit="" id="{{ id }}_form" method="post" style="padding:20px;">
+                    {% csrf_token %}
+                    <div style="display:flex; align-items: center;gap:20px;">
+                        {% if show_language_select %}
+                            <div class="" style="flex-shrink: 0">
+                                <select id="{{ id }}_language" name="{{ id }}_language">
+                                    <option value="english">English</option>
+                                    <option value="nepali">Nepali</option>
+                                </select>
+                            </div>
+                        {% endif %}
+                        <div style="flex-grow: 1">
+                            <input placeholder="{{ input_placeholder }}" class="" id="{{ id }}_question"
+                                   name="{{ id }}_question">
                         </div>
-                    {% endif %}
-                    <div style="flex-grow: 1">
-                        <input placeholder="{{ input_placeholder }}" class="" id="{{ id }}_question"
-                               name="{{ id }}_question">
+
+                        <div>
+                            <button type="submit"
+                                    style="border-radius:10px;border:none; background-color: var(--primary);"
+                                    class="btn btn-primary"><i
+                                    class="fa fa-paper-plane"></i></button>
+                        </div>
                     </div>
 
-                    <div>
-                        <button type="submit" style="border-radius:10px;border:none; background-color: var(--primary);"
-                                class="btn btn-primary"><i
-                                class="fa fa-paper-plane"></i></button>
-                    </div>
-                </div>
-
-            </form>
-        </div>
+                </form>
+            </div>
+        {% endif %}
     </div>
     <script>
         $("#{{ id }}_form").submit(function (e) {
