@@ -1,0 +1,16 @@
+{% extends 'generator.html' %}
+{#{% load custom_template_tags %}#}
+{% block main %}
+    {% url 'text_completion' as url %}
+    {% with  request_url=url input_placeholder="Ask your questions ..." show_language_select=False id='text_completion' %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock main %}
+{% block response %}
+    <div class="" id="text_completion_prompt" name="text_completion_answer">
+
+    </div>
+    <div class="" id="text_completion_answer" name="text_completion_answer"
+         style="width:100%;height:auto;overflow:auto; text-align: justify">
+    </div>
+{% endblock response %}

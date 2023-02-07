@@ -109,6 +109,26 @@ def paraphrase(request):
         prompt = None
     return JsonResponse({'answer': answer, 'prompt': prompt})
 
+def text_completion(request):
+    if request.method == 'POST':
+        prompt = request.POST['question']
+        # language = request.POST['language']
+        prompt = prompt
+        # print(prompt)
+        load_dotenv()
+        openai.api_key = os.environ.get("GPT3_KEY")
+        response = openai.Completion.create(
+            model="text-davinci-002",
+            prompt=prompt,
+            max_tokens=200,
+        )
+        answer = response['choices'][0]['text']
+        print(answer)
+    else:
+        answer = None
+        prompt = None
+    return JsonResponse({'answer': answer, 'prompt': prompt})
+
 
 def generate_images(request):
     if request.method == 'POST':
