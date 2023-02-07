@@ -2,7 +2,7 @@
 {#{% load custom_template_tags %}#}
 {% block main %}
     {% url 'text_completion' as url %}
-    {% with  request_url=url input_placeholder="Ask your questions ..." show_language_select=True id='text_completion' %}
+    {% with  request_url=url input_placeholder="Ask your questions ..." show_language_select=False id='text_completion' %}
         {{ block.super }}
     {% endwith %}
 {% endblock main %}

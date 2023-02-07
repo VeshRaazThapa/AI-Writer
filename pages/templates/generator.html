@@ -97,12 +97,13 @@
         sendToEditorButton = document.querySelector('#{{ id }}_send_to_editor_button');
 
         sendToEditorButton.addEventListener('click', (e) => {
-            const generated_content = e.target.parentElement.children[0].innerHTML;
+            {#const generated_content = e.target.parentElement.children[0].innerHTML;#}
+            const generated_content = $('#{{ id }}_answer').text();
             if (generated_content) {
                 CKEDITOR.instances['id_content'].insertHtml(generated_content);
             } else {
                 const generated_image = e.target.parentElement.children[0].innerHTML;
-                CKEDITOR.instances['id_content'].insertHtml(generated_content);
+                CKEDITOR.instances['id_content'].insertHtml(generated_image);
             }
 
         })
