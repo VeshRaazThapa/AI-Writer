@@ -52,7 +52,8 @@ form, label, fieldset, address, p {
     --card-background-color: #f2fcff;
     --navigation-color: var(--card-background-color);
     --border-color: rgba(0, 0, 0, 0.28);
-    --primary: #ff7e15;
+    /*--primary: #ff7e15;*/
+    --primary: #1583E9;
     --color_1: #FEB4B6;
     --color_2: #BFD3F8;
     --color_3: #8EDBA9;

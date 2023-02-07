@@ -12,6 +12,7 @@ urlpatterns = [
     path('blog/<int:pk>/edit',views.BlogUpdateView.as_view(), name='update_blog'),
     path('essay-writing/', views.essay_writing, name='essay_writing'),
     path('paraphrase/', views.paraphrase, name='paraphrase'),
+    path('text-completion/', views.text_completion, name='text_completion'),
     path('generate-images/', views.generate_images, name='generate_images'),
     path('about/', views.about, name='about'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
