@@ -31,14 +31,14 @@
                 <form onsubmit="" id="{{ id }}_form" method="post" style="padding:20px;">
                     {% csrf_token %}
                     <div style="display:flex; align-items: center;gap:20px;">
-                        {% if show_language_select %}
-                            <div class="" style="flex-shrink: 0">
-                                <select id="{{ id }}_language" name="{{ id }}_language">
-                                    <option value="english">English</option>
-                                    <option value="nepali">Nepali</option>
-                                </select>
-                            </div>
-                        {% endif %}
+{#                        {% if not show_language_select %}#}
+{#                            <div class="" style="flex-shrink: 0">#}
+{#                                <select id="{{ id }}_language" name="{{ id }}_language">#}
+{#                                    <option value="english">English</option>#}
+{#                                    <option value="nepali">Nepali</option>#}
+{#                                </select>#}
+{#                            </div>#}
+{#                        {% endif %}#}
                         <div style="flex-grow: 1">
                             <input placeholder="{{ input_placeholder }}" class="" id="{{ id }}_question"
                                    name="{{ id }}_question">

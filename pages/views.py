@@ -70,15 +70,16 @@ class BlogUpdateView(UpdateView):
 def essay_writing(request):
     if request.method == 'POST':
         prompt = request.POST['question']
-        language = request.POST['language']
-        prompt = "Write an essay in " + language + " about " + prompt
-        print(prompt)
+        # language = request.POST['language']
+        language = 'English'
+        prompt = "Write a long essay " + "about " + prompt
+        # print(prompt)
         load_dotenv()
         openai.api_key = os.environ.get("GPT3_KEY")
         response = openai.Completion.create(
             model="text-davinci-002",
             prompt=prompt,
-            max_tokens=1000,
+            max_tokens=2048,
         )
         answer = response['choices'][0]['text']
         print(answer)
@@ -92,15 +93,16 @@ def essay_writing(request):
 def paraphrase(request):
     if request.method == 'POST':
         prompt = request.POST['question']
-        language = request.POST['language']
-        prompt = "Paraphrase in " + language + " this " + prompt
-        print(prompt)
+        # language = request.POST['language']
+        language = 'English'
+        prompt = "Paraphrase the following content: \n" + prompt
+        # print(prompt)
         load_dotenv()
         openai.api_key = os.environ.get("GPT3_KEY")
         response = openai.Completion.create(
             model="text-davinci-002",
             prompt=prompt,
-            max_tokens=1000,
+            max_tokens=2048,
         )
         answer = response['choices'][0]['text']
         print(answer)
@@ -113,17 +115,18 @@ def text_completion(request):
     if request.method == 'POST':
         prompt = request.POST['question']
         # language = request.POST['language']
-        prompt = prompt
+        prompt = 'Write a long blog about ' + prompt
         # print(prompt)
         load_dotenv()
         openai.api_key = os.environ.get("GPT3_KEY")
         response = openai.Completion.create(
             model="text-davinci-002",
             prompt=prompt,
-            max_tokens=1000,
+            max_tokens=2048,
+            # temperature= 1,
         )
         answer = response['choices'][0]['text']
-        print(answer)
+        # print(answer)
     else:
         answer = None
         prompt = None
