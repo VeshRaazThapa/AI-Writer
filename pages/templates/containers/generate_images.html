@@ -2,7 +2,7 @@
 {#{% load custom_template_tags %}#}
 {% block main %}
     {% url 'generate_images' as url %}
-    {% with  request_url=url input_placeholder="Give a topic to paraphrase ..." show_language_select=True id='generate_images' %}
+    {% with  request_url=url input_placeholder="Give a topic to generate image on ..." show_language_select=True id='generate_images' %}
         {{ block.super }}
     {% endwith %}
 {% endblock main %}

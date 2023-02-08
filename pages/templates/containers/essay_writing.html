@@ -2,7 +2,7 @@
 {#{% load custom_template_tags %}#}
 {% block main %}
     {% url 'essay_writing' as essay_writing_url %}
-    {% with  request_url=essay_writing_url input_placeholder="Give a topic to write essay ..." show_language_select=True id='essay_writing' %}
+    {% with  request_url=essay_writing_url input_placeholder="Write your content topic here ..." show_language_select=True id='essay_writing' %}
         {{ block.super }}
     {% endwith %}
 
