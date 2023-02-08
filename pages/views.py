@@ -13,7 +13,7 @@ from django.urls import reverse_lazy
 
 def home(request):
     form = BlogForm()
-    return render(request, 'pages/home.html', {'blog_form': form, 'blogs': Blog.objects.all()})
+    return render(request, 'pages/home.html', {'blog_form': form, 'blogs': Blog.objects.all().order_by('-created_at')})
 
 
 def create_blog(request):
@@ -46,7 +46,7 @@ class BlogDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['blog_form'] = BlogForm(instance=self.object)
         context['update'] = True
-        context['blogs']= Blog.objects.all()
+        context['blogs']= Blog.objects.all().order_by('-created_at')
         return context
     # return render(request, 'pages/home.html', {'blog_form': form, 'blogs': Blog.objects.all()})
 
@@ -147,7 +147,7 @@ def generate_images(request):
             # max_tokens=200,
         )
         image_url = response['data'][0]['url']
-        print(image_url)
+        # print(image_url)
     else:
         image_url = None
         prompt = None
