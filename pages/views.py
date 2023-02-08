@@ -78,7 +78,7 @@ def essay_writing(request):
         response = openai.Completion.create(
             model="text-davinci-002",
             prompt=prompt,
-            max_tokens=2000,
+            max_tokens=1000,
         )
         answer = response['choices'][0]['text']
         print(answer)
@@ -100,7 +100,7 @@ def paraphrase(request):
         response = openai.Completion.create(
             model="text-davinci-002",
             prompt=prompt,
-            max_tokens=2000,
+            max_tokens=1000,
         )
         answer = response['choices'][0]['text']
         print(answer)
@@ -120,7 +120,7 @@ def text_completion(request):
         response = openai.Completion.create(
             model="text-davinci-002",
             prompt=prompt,
-            max_tokens=2000,
+            max_tokens=1000,
         )
         answer = response['choices'][0]['text']
         print(answer)
