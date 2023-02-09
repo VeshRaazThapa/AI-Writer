@@ -8,7 +8,8 @@ from .models import Blog
 from django.http import HttpResponseRedirect
 from django.views.generic import DetailView, UpdateView
 from django.urls import reverse_lazy
-
+import requests
+import uuid
 # python manage.py runserver
 
 def home(request):
@@ -26,7 +27,7 @@ def create_blog(request):
             # return redirect('blogs')
     else:
         form = BlogForm()
-    return render(request, 'pages/create_blog.html', {'form': form})
+    return render(request, 'pages/create_blog.html', {'form': form })
 
 class BlogDetailPlaneView(DetailView):
     model = Blog
@@ -37,7 +38,6 @@ class BlogDetailPlaneView(DetailView):
         context['blog_form'] = BlogForm(instance=self.object)
         context['update'] = True
         return context
-    # return render(request, 'pages/home.html', {'blog_form': form, 'blogs': Blog.objects.all()})
 class BlogDetailView(DetailView):
     model = Blog
     template_name = 'pages/blog_detail.html'
@@ -48,7 +48,6 @@ class BlogDetailView(DetailView):
         context['update'] = True
         context['blogs']= Blog.objects.all().order_by('-created_at')
         return context
-    # return render(request, 'pages/home.html', {'blog_form': form, 'blogs': Blog.objects.all()})
 
 class BlogUpdateView(UpdateView):
     model = Blog
@@ -86,7 +85,6 @@ def essay_writing(request):
     else:
         answer = None
         prompt = None
-    # return render(request, 'pages/essay_writing.html', {'answer': answer,'prompt':prompt})
     return JsonResponse({'answer': answer, 'prompt': prompt})
 
 
@@ -132,7 +130,7 @@ def text_completion(request):
         prompt = None
     return JsonResponse({'answer': answer, 'prompt': prompt})
 
-
+# saving data to the database
 def generate_images(request):
     if request.method == 'POST':
         prompt = request.POST['question']
@@ -146,14 +144,20 @@ def generate_images(request):
             size='512x512',
             # max_tokens=200,
         )
+        print(response['data'],'---------')
         image_url = response['data'][0]['url']
-        # print(image_url)
+        image_name = 'media/generated_image/'+str(uuid.uuid4()) + '.jpg'
+        response = requests.get(image_url)
+
+        with open(image_name , 'wb') as f:
+            f.write(response.content)
     else:
-        image_url = None
+        image_name = None
         prompt = None
-    # return JsonResponse({'answer': image_url,'prompt':prompt})
-    return render(request, 'pages/image_generation.html', {'image_url': image_url, 'prompt': prompt})
+    return render(request, 'pages/image_generation.html', {'image_url': image_name, 'prompt': prompt})
 
 
 def about(request):
     return render(request, 'pages/about.html')
+
+

@@ -42,7 +42,10 @@
     {#    <div id="content">This is some sample content.</div>#}
     <script>
         CKEDITOR.replace('content');
-        console.log(CKEDITOR.instances);
+        {#CKEDITOR.config.filebrowserUploadUrl = '/ckeditor/upload/';#}
+        {#CKEDITOR.config.uploadHandler = {{ CustomUploadHandler }};#}
+        {#console.log(CKEDITOR.instances);#}
+
         {#ClassicEditor#}
         {#    .create(document.querySelector('#content'))#}
         {#    .then(editor => {#}
