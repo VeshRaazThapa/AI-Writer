@@ -17,6 +17,12 @@ To run the website locally, clone the repository and run the following commands 
 
 `export GPT3_KEY="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"`
 
+`python manage.py makemigrations`
+
+`mkdir media`
+
+`mkdir media/generated_image`
+
 `python manage.py runserver`
 
 The website will then be available at http://127.0.0.1:8000/
