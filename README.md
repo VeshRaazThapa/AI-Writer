@@ -1,9 +1,7 @@
 # AI Writer
 
 AI Writer is a website that utilizes GPT-3 technology to generate high-quality essays and articles on a variety of topics. It is designed to make the writing process faster and more efficient for students, writers, and professionals.
-
-![image](https://user-images.githubusercontent.com/33957756/213571121-ce79aa3b-c6af-4c72-a0e5-a924109006e9.png)
-
+![image](./static/image1.png)
 
 ## Features
 
@@ -27,8 +25,3 @@ The website will then be available at http://127.0.0.1:8000/
 
 - [Django](https://www.djangoproject.com/) - The web framework used
 - [OpenAI GPT-3](https://openai.com/gpt-3/) - The AI model used
-
-## Author
-
-- **Eyad ElShabrawy** - [eyadelshabrawy](https://github.com/eyadelshabrawy)
-

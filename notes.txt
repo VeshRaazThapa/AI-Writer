@@ -1,1 +1,0 @@
-export GPT3_KEY="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"
