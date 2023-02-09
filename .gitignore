@@ -1,7 +1,9 @@
 keys.env
 mysite/__pycache__/
 pages/__pycache__/
+pages/migrations/__pycache__/
 
 media/generated_image
 db.sqlite3
 uploads/
+nohup.out
